@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.page.field_image
     - field.field.node.page.field_meta_tags
     - field.field.node.page.field_paragraphs
+    - field.field.node.page.panelizer
     - node.type.page
   module:
     - entity_reference_revisions
@@ -36,18 +37,17 @@ content:
     third_party_settings: {  }
     region: content
   content_moderation_control:
-    weight: 0
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
   field_image:
-    weight: 5
+    weight: 0
     label: above
     settings:
       image_style: ''
-      image_link: ''
     third_party_settings: {  }
-    type: image
+    type: image_url
     region: content
   field_meta_tags:
     type: metatag_empty_formatter
@@ -58,7 +58,7 @@ content:
     third_party_settings: {  }
   field_paragraphs:
     type: entity_reference_revisions_entity_view
-    weight: 6
+    weight: 5
     label: above
     settings:
       view_mode: default

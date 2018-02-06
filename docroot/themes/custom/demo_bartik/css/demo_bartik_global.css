@@ -1,0 +1,13 @@
+.site-branding__logo img {
+    height: 75px;
+    width: 300px;
+}
+
+@font-face {
+    font-family: demosans-light;
+    src: url(../assets/fonts/demo-sans/demosans-light.woff);
+}
+
+body{
+    font-family: demosans-light;
+}

@@ -1,0 +1,10 @@
+global-styling:
+  version: VERSION
+  css:
+    component:
+      css/demo_bartik_global.css: {}
+
+random-image:
+  version: VERSION
+  js:
+    js/random_image.js: {}
