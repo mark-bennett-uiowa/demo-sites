@@ -6,8 +6,8 @@ dependencies:
     - editor
     - entity_embed
 _core:
-  default_config_hash: CQb74gwvNsv7PtmMHU-kGM-pK1YhLsg0EWrbHaLp6wo
-name: 'Basic HTML'
+  default_config_hash: GEGTgR7x2RwGkrvPLNMHCMOeu2M0uaooyjzifyL-LPU
+name: 'Rich text'
 format: rich_text
 weight: 1
 filters:
