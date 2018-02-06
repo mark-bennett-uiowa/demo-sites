@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.page.panelizer
     - node.type.page
   module:
-    - entity_reference_revisions
     - image
     - metatag
     - panelizer
@@ -46,9 +45,8 @@ content:
     label: above
     settings:
       image_style: ''
-      image_link: ''
     third_party_settings: {  }
-    type: image
+    type: image_url
     region: content
   field_meta_tags:
     type: metatag_empty_formatter
@@ -57,20 +55,12 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-  field_paragraphs:
-    type: entity_reference_revisions_entity_view
-    weight: 5
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    region: content
   links:
     weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_paragraphs: true
   panelizer: true
   scheduled_publication: true

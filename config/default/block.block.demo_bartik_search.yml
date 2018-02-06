@@ -1,0 +1,31 @@
+uuid: c74c9a5e-3844-4535-ad99-78cb615b276e
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search
+  module:
+    - system
+    - views
+  theme:
+    - demo_bartik
+_core:
+  default_config_hash: UDHpza-uTXT90uUqIrgPDBW4XrHBA1XpzSBQyyRB2Yg
+id: demo_bartik_search
+theme: demo_bartik
+region: content
+weight: 0
+provider: null
+plugin: 'views_exposed_filter_block:search-page'
+settings:
+  id: 'views_exposed_filter_block:search-page'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false
+    context_mapping: {  }
