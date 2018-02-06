@@ -4,7 +4,7 @@ dependencies:
   module:
     - editor
     - entity_embed
-name: 'Basic HTML'
+name: 'Rich text'
 format: rich_text
 weight: 1
 filters:

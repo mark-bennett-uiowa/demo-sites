@@ -8,7 +8,10 @@ folder: ../config/shared
 module: {  }
 theme: {  }
 blacklist:
+  - config_split.config_split.shared
   - system.performance
+  - system.rss
+  - system.theme
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
