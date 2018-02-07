@@ -13,7 +13,8 @@
         "drupal/migrate_tools": "^2.0",
         "drupal/field_collection": "3.x-dev",
         "drupal/config_override": "^1.0@beta",
-        "drupal/views_data_export": "^1.0@alpha"
+        "drupal/views_data_export": "^1.0@alpha",
+        "drupal/examples": "1.x-dev"
     },
     "require-dev": {},
     "extra": {
