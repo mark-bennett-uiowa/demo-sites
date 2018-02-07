@@ -4,7 +4,7 @@ uiowa_tracker.admin_uiowa:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
     _title: 'University of Iowa'
   requirements:
-    _permission: 'access administration pages'
+    _permission: 'administer site configuration'
 
 uiowa_tracker.admin_uiowa_tracker:
   path: 'admin/config/uiowa/uiowa_tracker'

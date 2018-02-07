@@ -27,6 +27,9 @@ class UIowaTrackerConfigForm extends ConfigFormBase {
     );
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct(ConfigFactoryInterface $config_factory, Connection $connection) {
     parent::__construct($config_factory);
     $this->connection = $connection;
@@ -59,8 +62,8 @@ class UIowaTrackerConfigForm extends ConfigFormBase {
 
     $form['uiowa_tracker_pathlist'] = [
       '#type' => 'textarea',
-      '#title' => t('Enter paths of all nodes to track authenticated user views (one per line)'),
-      '#description' => t('The paths (e.g. /about/contact) of all nodes that require tracking of authenticated user views, one path per line. ADD leading or trailing slashes.'),
+      '#title' => $this->t('Enter paths of all nodes to track authenticated user views (one per line)'),
+      '#description' => $this->t('The paths (e.g. /about/contact) of all nodes that require tracking of authenticated user views, one path per line. ADD leading or trailing slashes.'),
       '#required' => TRUE,
       '#rows' => 15,
       '#default_value' => $config->get('uiowa_tracker_pathlist'),
@@ -68,8 +71,8 @@ class UIowaTrackerConfigForm extends ConfigFormBase {
 
     $form['uiowa_tracker_clearlog_fieldset'] = [
       '#type' => 'fieldset',
-      '#title' => t('Actions'),
-      '#description' => t('In order to clear all entries in the tracking log table, click the \'Clear tracking log\' button. This will remove ALL entries in the table, so use with caution.'),
+      '#title' => $this->t('Actions'),
+      '#description' => $this->t("In order to clear all entries in the tracking log table, click the \'Clear tracking log\' button. This will remove ALL entries in the table, so use with caution."),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     ];
@@ -82,7 +85,7 @@ class UIowaTrackerConfigForm extends ConfigFormBase {
 
     $form['uiowa_tracker_clearlog_fieldset']['uiowa_tracker_clearlog'] = [
       '#type' => 'submit',
-      '#value' => t('Clear tracking log'),
+      '#value' => $this->t('Clear tracking log'),
       '#attributes' => ['onclick' => 'if(!confirm("Are you sure you want to delete all entries in the tracking log?")){return false;}'],
       '#submit' => ['::uiowaTrackerClearlogFormSubmit'],
     ];
@@ -120,7 +123,7 @@ class UIowaTrackerConfigForm extends ConfigFormBase {
     $config->set('uiowa_tracker_pathlist', $form_state->getValue('uiowa_tracker_pathlist'));
     $config->save();
 
-    drupal_set_message(t('The path list of tracked nodes has been saved.'));
+    drupal_set_message($this->t('The path list of tracked nodes has been saved.'));
 
     return parent::submitForm($form, $form_state);
   }
@@ -135,7 +138,7 @@ class UIowaTrackerConfigForm extends ConfigFormBase {
    */
   public function uiowaTrackerClearlogFormSubmit(array &$form, FormStateInterface $form_state) {
     $this->connection->delete('uiowa_tracker_log')->execute();
-    drupal_set_message(t('All entries in the University of Iowa tracker log have been cleared.'));
+    drupal_set_message($this->t('All entries in the University of Iowa tracker log have been cleared.'));
   }
 
 }

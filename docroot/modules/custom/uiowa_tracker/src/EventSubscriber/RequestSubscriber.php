@@ -11,11 +11,17 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * {@inheritdoc}
+ */
 class MymoduleSubscriber implements EventSubscriberInterface {
 
   protected $routeMatch;
   protected $connection;
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct(RouteMatch $routeMatch, Connection $connection) {
     $this->routeMatch = $routeMatch;
     $this->connection = $connection;
@@ -25,7 +31,7 @@ class MymoduleSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::REQUEST][] = array('trackNodes');
+    $events[KernelEvents::REQUEST][] = ['trackNodes'];
     return $events;
   }
 
@@ -33,26 +39,26 @@ class MymoduleSubscriber implements EventSubscriberInterface {
    * Tracks the request if it belongs to a node.
    *
    * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
-   * The response event for this request.
+   *   The response event for this request.
    */
   public function trackNodes(GetResponseEvent $event) {
 
     /* @var NodeInterface $node */
     $node = $this->routeMatch->getParameter('node');
 
-    if ($node instanceof \Drupal\node\NodeInterface) {
+    if ($node instanceof NodeInterface) {
       return;
     }
     // UID = 0 means anonymous.
     $uid = \Drupal::currentUser()->id();
     $nid = $node->id();
 
-    //@TODO Is this really the name of the content type?
+    // @TODO Is this really the name of the content type?
     $nodeIsType = TRUE || $node->bundle() == 'content-type';
     $nodeIsTracked = uiowa_tracker_check_node($node);
 
     if ($nodeIsType && $uid && $nodeIsTracked) {
-      $this->uiowa_tracker_insert_node_view($nid, $uid);
+      $this->uiowaTrackerInsertNodeView($nid, $uid);
     }
 
   }
@@ -64,17 +70,19 @@ class MymoduleSubscriber implements EventSubscriberInterface {
    *   The viewed node.
    * @param int $uid
    *   The user who viewed the node.
+   *
    * @return bool
-   *   TRUE if the node view was successfully added to the uiowa_tracker_log table, otherwise FALSE.
+   *   TRUE if node was added to the uiowa_tracker_log table, otherwise FALSE.
    */
-  protected function uiowa_tracker_insert_node_view($nid, $uid) {
+  protected function uiowaTrackerInsertNodeView($nid, $uid) {
     if (is_numeric($nid) && is_numeric($uid) && $uid) {
       /* @var Node $node */
       $node = Node::load($nid);
 
       /* @var User $user */
       $user = User::load($uid);
-    } else {
+    }
+    else {
       return FALSE;
     }
 
@@ -82,14 +90,14 @@ class MymoduleSubscriber implements EventSubscriberInterface {
 
     $rolelist = "";
     foreach ($user->getRoles() as $role) {
-      if ($role != "authenticated"){
+      if ($role != "authenticated") {
         $rolelist .= $role . ", ";
       }
     }
     $rolelist = substr($rolelist, 0, -2);
 
     $this->connection->insert('uiowa_tracker_log')
-      -> fields([
+      ->fields([
         'nid' => $nid,
         'path' => $path,
         'pagetitle' => $node->getTitle(),
