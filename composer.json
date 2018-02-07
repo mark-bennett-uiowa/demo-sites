@@ -12,7 +12,8 @@
         "drupal/migrate_plus": "^2.0",
         "drupal/migrate_tools": "^2.0",
         "drupal/field_collection": "3.x-dev",
-        "drupal/config_override": "^1.0@beta"
+        "drupal/config_override": "^1.0@beta",
+        "drupal/views_data_export": "^1.0@alpha"
     },
     "require-dev": {},
     "extra": {

@@ -14,6 +14,7 @@ module:
   content_moderation: 0
   contextual: 0
   crop: 0
+  csv_serialization: 0
   ctools: 0
   ctools_block: 0
   datetime: 0
@@ -78,6 +79,7 @@ module:
   quickedit: 0
   rdf: 0
   responsive_image: 0
+  rest: 0
   schemata: 0
   schemata_json_schema: 0
   search_api: 0
@@ -94,9 +96,11 @@ module:
   text_formats: 0
   token: 0
   toolbar: 0
+  uiowa_tracker: 0
   user: 0
   video_embed_field: 0
   video_embed_media: 0
+  views_data_export: 0
   views_infinite_scroll: 0
   views_ui: 0
   workflows: 0

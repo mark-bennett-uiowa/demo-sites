@@ -1,0 +1,11 @@
+uiowa_tracker.admin_uiowa:
+  title: 'University of Iowa'
+  route_name: uiowa_tracker.admin_uiowa
+  parent: system.admin_config
+  description: 'University of Iowa configs.'
+
+uiowa_tracker.admin_uiowa_tracker:
+  title: 'University of Iowa Tracker'
+  description: 'Configuration for the University of Iowa Tracker module.'
+  route_name: uiowa_tracker.admin_uiowa_tracker
+  parent: uiowa_tracker.admin_uiowa
