@@ -5,7 +5,7 @@ uiowa_tracker.admin_uiowa:
   description: 'University of Iowa configs.'
 
 uiowa_tracker.admin_uiowa_tracker:
-  title: 'University of Iowa Tracker'
+  title: 'University of Iowa Tracker Admin'
   description: 'Configuration for the University of Iowa Tracker module.'
   route_name: uiowa_tracker.admin_uiowa_tracker
   parent: uiowa_tracker.admin_uiowa

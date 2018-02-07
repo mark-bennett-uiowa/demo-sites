@@ -8,7 +8,7 @@ features:
   favicon: 1
 logo:
   use_default: 0
-  path: profiles/contrib/lightning/lightning.png
+  path: themes/custom/demo_bartik/logo.svg
 favicon:
   use_default: 0
   path: profiles/contrib/lightning/favicon.ico

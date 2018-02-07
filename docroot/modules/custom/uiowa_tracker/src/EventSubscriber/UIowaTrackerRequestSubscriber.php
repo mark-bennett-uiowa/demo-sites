@@ -2,8 +2,12 @@
 
 namespace Drupal\uiowa_tracker\EventSubscriber;
 
+use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Database\Connection;
-use Drupal\Core\Routing\RouteMatch;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Routing\CurrentRouteMatch;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
@@ -14,17 +18,23 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * {@inheritdoc}
  */
-class MymoduleSubscriber implements EventSubscriberInterface {
+class UIowaTrackerRequestSubscriber implements EventSubscriberInterface {
 
   protected $routeMatch;
   protected $connection;
+  protected $config;
+  protected $currentUser;
+  protected $entityTypeManager;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(RouteMatch $routeMatch, Connection $connection) {
+  public function __construct(CurrentRouteMatch $routeMatch, Connection $connection, ConfigFactory $config, AccountProxyInterface $currentUser, EntityTypeManager $entityTypeManager) {
     $this->routeMatch = $routeMatch;
     $this->connection = $connection;
+    $this->config = $config;
+    $this->currentUser = $currentUser;
+    $this->entityTypeManager = $entityTypeManager;
   }
 
   /**
@@ -45,17 +55,19 @@ class MymoduleSubscriber implements EventSubscriberInterface {
 
     /* @var NodeInterface $node */
     $node = $this->routeMatch->getParameter('node');
+    $isNode = $node instanceof NodeInterface;
+    $isNodeRoute = $this->routeMatch->getRouteName() == 'entity.node.canonical';
 
-    if ($node instanceof NodeInterface) {
+    if (!$isNode || !$isNodeRoute) {
       return;
     }
     // UID = 0 means anonymous.
-    $uid = \Drupal::currentUser()->id();
+    $uid = $this->currentUser->id();
     $nid = $node->id();
 
     // @TODO Is this really the name of the content type?
     $nodeIsType = TRUE || $node->bundle() == 'content-type';
-    $nodeIsTracked = uiowa_tracker_check_node($node);
+    $nodeIsTracked = $this->uiowaTrackerCheckNode($node);
 
     if ($nodeIsType && $uid && $nodeIsTracked) {
       $this->uiowaTrackerInsertNodeView($nid, $uid);
@@ -76,11 +88,14 @@ class MymoduleSubscriber implements EventSubscriberInterface {
    */
   protected function uiowaTrackerInsertNodeView($nid, $uid) {
     if (is_numeric($nid) && is_numeric($uid) && $uid) {
+      $nodeStorage = $this->entityTypeManager->getStorage('node');
+      $userStorage = $this->entityTypeManager->getStorage('user');
+
       /* @var Node $node */
-      $node = Node::load($nid);
+      $node = $nodeStorage->load($nid);
 
       /* @var User $user */
-      $user = User::load($uid);
+      $user = $userStorage->load($uid);
     }
     else {
       return FALSE;
@@ -106,6 +121,27 @@ class MymoduleSubscriber implements EventSubscriberInterface {
         'rolename' => $rolelist,
         'timestamp' => REQUEST_TIME,
       ])->execute();
+  }
+
+  /**
+   * Check that the nid is found in the uiowa_tracker_paths table.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $node
+   *   The viewed node.
+   *
+   * @return bool
+   *   TRUE if the node is found in the uiowa_tracker_paths table.
+   */
+  public function uiowaTrackerCheckNode(EntityInterface $node) {
+    $trackerConfig = $this->config->get('uiowa_tracker.settings');
+    $trackerPaths = explode("\r\n", $trackerConfig->get('uiowa_tracker_pathlist'));
+    $path = $node->toUrl()->toString();
+    if (in_array($path, $trackerPaths)) {
+      return TRUE;
+    }
+
+    return FALSE;
+
   }
 
 }
