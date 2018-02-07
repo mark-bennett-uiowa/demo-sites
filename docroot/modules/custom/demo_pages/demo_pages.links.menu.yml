@@ -1,5 +1,0 @@
-demo_pages_posts:
-  title: Demo Posts
-  description: 'Posts from an external source.'
-  route_name: demo_pages_posts
-  parent: system.admin_content
