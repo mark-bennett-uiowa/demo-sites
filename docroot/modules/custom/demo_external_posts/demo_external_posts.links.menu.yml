@@ -1,0 +1,5 @@
+demo_external_posts_ws_posts:
+  title: External posts
+  description: 'Posts from somewhere else.'
+  route_name: demo_external_posts_ws_posts
+  parent: system.admin_content

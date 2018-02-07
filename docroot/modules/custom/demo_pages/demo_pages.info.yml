@@ -1,0 +1,5 @@
+name: Demo Pages
+description: Show some demo pages.
+core: 8.x
+type: module
+package: Demos

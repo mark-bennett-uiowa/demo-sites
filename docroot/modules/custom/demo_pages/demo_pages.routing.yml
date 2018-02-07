@@ -1,0 +1,15 @@
+demo_pages_posts:
+  path: 'demo/posts'
+  defaults:
+    _controller: '\Drupal\demo_pages\Controller\DemoController::posts'
+    _title: 'Posts'
+  requirements:
+    _permission: 'view external posts'
+
+demo_pages_post:
+  path: 'demo/posts/{post_id}'
+  defaults:
+    _controller: '\Drupal\page_example\Controller\PageExampleController::simple'
+    _title: 'Simple - no arguments'
+  requirements:
+    _permission: 'view external posts'
