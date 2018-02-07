@@ -8,9 +8,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\user\Entity\User;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -91,10 +89,10 @@ class UIowaTrackerRequestSubscriber implements EventSubscriberInterface {
       $nodeStorage = $this->entityTypeManager->getStorage('node');
       $userStorage = $this->entityTypeManager->getStorage('user');
 
-      /* @var Node $node */
+      /* @var \Drupal\node\Entity\Node $node */
       $node = $nodeStorage->load($nid);
 
-      /* @var User $user */
+      /* @var \Drupal\user\Entity\User $user */
       $user = $userStorage->load($uid);
     }
     else {
