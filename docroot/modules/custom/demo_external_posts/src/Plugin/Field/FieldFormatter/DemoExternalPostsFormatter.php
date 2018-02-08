@@ -10,7 +10,7 @@ use Drupal\demo_external_posts\WSPosts;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Plugin implementation of the 'webform_workflow_formatter' formatter.
+ * Plugin implementation of the 'demo_external_posts_formatter' formatter.
  *
  * @FieldFormatter(
  *   id = "demo_external_posts_formatter",

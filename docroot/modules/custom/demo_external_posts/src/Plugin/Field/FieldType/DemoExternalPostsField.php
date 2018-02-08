@@ -7,7 +7,7 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
- * Plugin implementation of the 'webform_workflow' field type.
+ * Plugin implementation of the 'demo_external_posts_field' field type.
  *
  * @FieldType(
  *   id = "demo_external_posts_field",
