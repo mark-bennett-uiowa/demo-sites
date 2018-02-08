@@ -14,7 +14,8 @@
         "drupal/field_collection": "3.x-dev",
         "drupal/config_override": "^1.0@beta",
         "drupal/views_data_export": "^1.0@alpha",
-        "drupal/examples": "1.x-dev"
+        "drupal/examples": "1.x-dev",
+        "drupal/big_pipe_demo": "^1.2"
     },
     "require-dev": {},
     "extra": {

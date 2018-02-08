@@ -3,6 +3,7 @@
 namespace Drupal\demo_external_posts\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\demo_external_posts\WSPosts;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -37,9 +38,39 @@ class ExternalPostBlock extends BlockBase implements ContainerFactoryPluginInter
   /**
    * {@inheritdoc}
    */
+  public function defaultConfiguration() {
+    return [
+      'demo_external_posts_config' => 1,
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockForm($form, FormStateInterface $form_state) {
+    $form['demo_external_posts_post_id'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Post ID'),
+      '#description' => $this->t('This will load an external post.'),
+      '#default_value' => $this->configuration['demo_external_posts_config'],
+    ];
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    $this->configuration['demo_external_posts_config']
+      = $form_state->getValue('demo_external_posts_post_id');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function build() {
 
-    return $this->wsPosts->renderPost(2);
+    return $this->wsPosts->renderPost($this->configuration['demo_external_posts_config']);
 
   }
 
