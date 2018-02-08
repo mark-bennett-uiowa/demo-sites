@@ -1,0 +1,7 @@
+block.settings.external_post_block:
+  type: block_settings
+  label: 'An external post'
+  mapping:
+    demo_external_posts_config:
+      type: int
+      label: 'Post ID'

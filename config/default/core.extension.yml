@@ -19,6 +19,7 @@ module:
   ctools_block: 0
   datetime: 0
   dblog: 0
+  demo_external_posts: 0
   devel: 0
   devel_generate: 0
   diff: 0

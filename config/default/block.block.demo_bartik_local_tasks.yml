@@ -9,7 +9,7 @@ _core:
 id: demo_bartik_local_tasks
 theme: demo_bartik
 region: content
-weight: -40
+weight: -7
 provider: null
 plugin: local_tasks_block
 settings:

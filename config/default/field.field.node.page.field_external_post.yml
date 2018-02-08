@@ -1,0 +1,23 @@
+uuid: a33a0ae4-2827-44c9-be89-6fa59ee46623
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_external_post
+    - node.type.page
+  module:
+    - demo_external_posts
+id: node.page.field_external_post
+field_name: field_external_post
+entity_type: node
+bundle: page
+label: 'External post'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    post_id: '1'
+default_value_callback: ''
+settings: {  }
+field_type: demo_external_posts_field

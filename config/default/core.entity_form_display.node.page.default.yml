@@ -5,13 +5,16 @@ dependencies:
   config:
     - entity_browser.browser.image_browser
     - field.field.node.page.body
+    - field.field.node.page.field_external_post
     - field.field.node.page.field_image
     - field.field.node.page.field_meta_tags
     - field.field.node.page.field_paragraphs
+    - field.field.node.page.panelizer
     - node.type.page
   module:
     - content_moderation
     - datetime
+    - demo_external_posts
     - entity_browser
     - metatag
     - paragraphs
@@ -38,6 +41,12 @@ content:
     weight: 2
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_external_post:
+    weight: 104
+    settings: {  }
+    third_party_settings: {  }
+    type: demo_external_posts_field_widget
     region: content
   field_image:
     type: entity_browser_file
